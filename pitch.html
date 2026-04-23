@@ -1,0 +1,507 @@
+<html lang="tr"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ApexScouty &amp; ApexCrawl — Dijital Büyüme Stratejisi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:#0a0a0f;color:#fff;overflow:hidden;height:100vh}
+.slide{min-height:100vh;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 60px 60px;position:absolute;top:0;left:0;width:100%;opacity:0;visibility:hidden;pointer-events:none;transition:opacity 0.6s ease,transform 0.6s ease;transform:translateY(30px);overflow-y:auto;scrollbar-width:none;z-index:0}.slide::-webkit-scrollbar{display:none}.slide.active{opacity:1;visibility:visible;pointer-events:all;transform:translateY(0);z-index:10}
+.badge{background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:8px 20px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+h1{font-size:clamp(40px,6vw,80px);font-weight:900;line-height:1.1;text-align:center;background:linear-gradient(135deg,#fff 0%,#a78bfa 50%,#6366f1 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px}
+h2{font-size:clamp(28px,4vw,52px);font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#fff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+p.lead{font-size:clamp(16px,2vw,22px);color:#94a3b8;line-height:1.7;text-align:center;max-width:700px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:32px;width:100%;max-width:1100px;margin-top:40px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;width:100%;max-width:1100px;margin-top:40px}
+.card{background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.05));border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:32px;transition:transform 0.3s}
+.card:hover{transform:translateY(-4px)}
+.card h3{font-size:20px;font-weight:700;margin-bottom:12px;color:#a78bfa}
+.card p{color:#94a3b8;line-height:1.6;font-size:15px}
+.num{font-size:48px;font-weight:900;background:linear-gradient(135deg,#6366f1,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.num-label{font-size:13px;color:#64748b;margin-top:4px}
+.highlight{color:#a78bfa;font-weight:700}
+.vs-table{width:100%;max-width:900px;border-collapse:collapse;margin-top:40px}
+.vs-table th{background:rgba(99,102,241,0.2);padding:16px 20px;text-align:left;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#a78bfa}
+.vs-table td{padding:14px 20px;border-bottom:1px solid #1e1e3a;font-size:15px;color:#e2e8f0}
+.vs-table tr:hover td{background:rgba(99,102,241,0.05)}
+.win{color:#34d399;font-weight:700}
+.lose{color:#f87171}
+.cta-block{text-align:center;margin-top:48px}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:18px 48px;border-radius:50px;font-weight:700;font-size:18px;color:#fff;text-decoration:none;letter-spacing:0.5px}
+.phase{display:flex;align-items:flex-start;gap:20px;padding:24px;border:1px solid #1e1e3a;border-radius:16px;margin-bottom:16px;width:100%;max-width:900px}
+.phase-num{background:linear-gradient(135deg,#6366f1,#8b5cf6);min-width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px}
+.phase-content h4{font-size:18px;font-weight:700;margin-bottom:6px;color:#e2e8f0}
+.phase-content p{color:#64748b;font-size:14px;line-height:1.6}
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%;max-width:1000px;margin-top:32px}
+.swot-card{padding:28px;border-radius:16px}
+.s-card{background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.3)}
+.w-card{background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.3)}
+.o-card{background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.3)}
+.t-card{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.3)}
+.swot-card h3{font-size:16px;font-weight:800;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px}
+.s-card h3{color:#34d399}
+.w-card h3{color:#f87171}
+.o-card h3{color:#a78bfa}
+.t-card h3{color:#fbbf24}
+.swot-card ul{list-style:none;padding:0}
+.swot-card li{font-size:14px;color:#94a3b8;padding:4px 0;padding-left:16px;position:relative}
+.swot-card li::before{content:"→";position:absolute;left:0;opacity:0.5}
+.footer-slide{background:linear-gradient(135deg,#0f0f2e,#1a0a3e)}
+.budget-row{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid #1e1e3a;width:100%;max-width:800px}
+.budget-row:last-child{border-bottom:none;border-top:2px solid #6366f1;margin-top:8px;padding-top:20px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.9);backdrop-filter:blur(20px);border-bottom:1px solid #1a1a2e;padding:16px 48px;display:flex;justify-content:space-between;align-items:center}
+nav .logo{font-weight:800;font-size:18px;background:linear-gradient(135deg,#6366f1,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav .nav-links{display:flex;gap:32px}
+nav a{color:#64748b;text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s}
+nav a:hover{color:#fff}
+.slide-num{position:absolute;bottom:32px;right:48px;font-size:12px;color:#334155;font-weight:600;letter-spacing:2px}
+.tag{display:inline-block;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.4);padding:6px 16px;border-radius:20px;font-size:13px;color:#a78bfa;margin:4px}
+.hero-logos{display:flex;gap:16px;margin:32px 0}
+.logo-pill{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:12px 28px;border-radius:50px;font-size:18px;font-weight:800}
+
+.slide-nav{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);z-index:200;display:flex;align-items:center;gap:16px;background:rgba(10,10,15,0.85);backdrop-filter:blur(16px);border:1px solid #1e1e3a;border-radius:50px;padding:10px 24px}
+.slide-nav button{background:none;border:none;color:#64748b;font-size:20px;cursor:pointer;padding:4px 8px;transition:color 0.2s;font-family:Inter,sans-serif}
+.slide-nav button:hover{color:#fff}
+.slide-nav .dots{display:flex;gap:8px}
+.slide-nav .dot{width:10px;height:10px;border-radius:50%;background:#1e1e3a;border:1px solid #334155;cursor:pointer;transition:all 0.3s}
+.slide-nav .dot.active{background:#6366f1;border-color:#6366f1;transform:scale(1.3)}
+.slide-counter{position:fixed;bottom:32px;right:48px;z-index:200;font-size:13px;color:#334155;font-weight:600;letter-spacing:2px}
+.key-hint{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:200;font-size:11px;color:#1e293b;letter-spacing:1px;transition:opacity 2s}
+</style>
+<style id="antigravity-scroll-lock-style">
+  html:root body.antigravity-scroll-lock {
+    overflow: hidden !important;
+  }
+</style></head>
+<body class="">
+
+<nav>
+  <div class="logo">ApexAgency</div>
+  <div class="nav-links">
+    <a href="#problem">Problem</a>
+    <a href="#solution">Strateji</a>
+    <a href="#swot">SWOT</a>
+    <a href="#plan">Plan</a>
+    <a href="#budget">Bütçe</a>
+  </div>
+</nav>
+
+<!-- SLIDE 1: HERO -->
+<div class="slide" style="background:radial-gradient(ellipse at 50% 0%,rgba(99,102,241,0.15) 0%,transparent 70%);padding-top:120px">
+  <div class="badge">Dijital Büyüme Stratejisi 2026</div>
+  <div class="hero-logos">
+    <div class="logo-pill">ApexScouty</div>
+    <div style="display:flex;align-items:center;color:#4a4a6a;font-size:24px">+</div>
+    <div class="logo-pill">ApexCrawl</div>
+  </div>
+  <h1>Amerika &amp; Avrupa'da<br>SaaS Büyüme Stratejisi</h1>
+  <p class="lead">İki ürünü uçtan uca ekosisteme dönüştürerek ABD ve Avrupa pazarında üyelik satışını ölçeklendirmek için hazırlanmış kapsamlı dijital pazarlama ve reklam stratejisi.</p>
+  <div style="display:flex;gap:16px;margin-top:40px">
+    <span class="tag">🇺🇸 Amerika</span>
+    <span class="tag">🇪🇺 Avrupa</span>
+    <span class="tag">Google Ads</span>
+    <span class="tag">Meta Ads</span>
+    <span class="tag">YouTube</span>
+    <span class="tag">Affiliate</span>
+  </div>
+  <div class="slide-num" style="display: none;">01 / 10</div>
+</div>
+
+<!-- SLIDE 2: PAZAR FIRSATI -->
+<div class="slide active" id="problem">
+  <div class="badge">Pazar Fırsatı</div>
+  <h2>Neden Şimdi? Neden Bu Pazar?</h2>
+  <div class="grid3">
+    <div class="card" style="text-align:center">
+      <div class="num">9.7M</div>
+      <div class="num-label">Aktif Amazon Satıcısı (Global)</div>
+      <p style="margin-top:12px">Her satıcı bir ürün araştırma aracına ihtiyaç duyuyor</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div class="num">$79/ay</div>
+      <div class="num-label">Helium 10 Starter Planı</div>
+      <p style="margin-top:12px">Kullanıcıların %67'si daha ucuz alternatif arıyor</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div class="num">$11/ay</div>
+      <div class="num-label">ApexScouty Starter</div>
+      <p style="margin-top:12px"><span class="highlight">%86 daha ucuz</span> — en güçlü rekabet silahı</p>
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:24px">
+    <div class="card">
+      <h3>🎯 ApexScouty Hedef Kitlesi</h3>
+      <p>Amazon FBA/FBM satıcıları, toptan tedarikçilerle çalışanlar, online arbitrage yapanlar. 23 global pazaryerinde analiz ihtiyacı olan her satıcı potansiyel müşteri.</p>
+    </div>
+    <div class="card">
+      <h3>🎯 ApexCrawl Hedef Kitlesi</h3>
+      <p>Kod bilgisi olmadan web'den veri toplamak isteyen e-ticaret işletmeleri, rakip fiyat takibi yapanlar, tedarikçi araştırmacıları.</p>
+    </div>
+  </div>
+  <div class="slide-num" style="display: none;">02 / 10</div>
+</div>
+
+<!-- SLIDE 3: REKABET KARSILASTIRMA -->
+<div class="slide" id="solution">
+  <div class="badge">Rekabet Analizi</div>
+  <h2>Rakiplere Karşı Konumumuz</h2>
+  <table class="vs-table">
+    <tbody><tr><th>Özellik</th><th>ApexScouty</th><th>Helium 10</th><th>Jungle Scout</th></tr>
+    <tr><td>Başlangıç Fiyatı</td><td class="win">$11/ay</td><td class="lose">$79/ay</td><td class="lose">$49/ay</td></tr>
+    <tr><td>İşlem Limiti</td><td class="win">YOK ✓</td><td class="lose">Var</td><td class="lose">Var</td></tr>
+    <tr><td>Tarama Hızı</td><td class="win">1M ürün/saat</td><td>Yavaş</td><td>Yavaş</td></tr>
+    <tr><td>Amazon Pazaryeri</td><td class="win">23 Pazaryeri</td><td>21</td><td>10</td></tr>
+    <tr><td>BPO Aracı</td><td class="win">✓ Amazon ile ortak</td><td class="lose">✗</td><td class="lose">✗</td></tr>
+    <tr><td>Scraping Entegrasyonu</td><td class="win">✓ ApexCrawl</td><td class="lose">✗</td><td class="lose">✗</td></tr>
+    <tr><td>Ücretsiz Plan</td><td class="win">✓ Sonsuza kadar</td><td>Kısıtlı</td><td class="lose">✗</td></tr>
+  </tbody></table>
+  <div class="slide-num" style="display: none;">03 / 10</div>
+</div>
+
+<!-- SLIDE 4: SWOT -->
+<div class="slide" id="swot">
+  <div class="badge">Stratejik Analiz</div>
+  <h2>SWOT Analizi</h2>
+  <div class="swot-grid">
+    <div class="swot-card s-card">
+      <h3>💪 Güçlü Yönler</h3>
+      <ul>
+        <li>%86 fiyat avantajı vs Helium 10</li>
+        <li>1M ürün/saat tarama hızı</li>
+        <li>23 Amazon pazaryeri desteği</li>
+        <li>İşlem limiti yok</li>
+        <li>ApexCrawl ile entegre ekosistem</li>
+        <li>Amazon BPO ortaklığı</li>
+      </ul>
+    </div>
+    <div class="swot-card w-card">
+      <h3>⚠️ Zayıf Yönler</h3>
+      <ul>
+        <li>Trustpilot/G2'de sıfır review</li>
+        <li>Düşük marka bilinirliği</li>
+        <li>Blog/içerik stratejisi yok</li>
+        <li>Teknik SEO sorunları</li>
+        <li>Sosyal medya varlığı yok</li>
+        <li>Karşılaştırma sayfaları yok</li>
+      </ul>
+    </div>
+    <div class="swot-card o-card">
+      <h3>🚀 Fırsatlar</h3>
+      <ul>
+        <li>Helium 10 kullanıcı memnuniyetsizliği</li>
+        <li>Amazon FBA büyüme trendi</li>
+        <li>Almanya'da boş pazar alanı</li>
+        <li>Affiliate kanalı açık</li>
+        <li>Product Hunt lansmanı</li>
+        <li>ApexCrawl → ApexScouty upsell</li>
+      </ul>
+    </div>
+    <div class="swot-card t-card">
+      <h3>🔴 Tehditler</h3>
+      <ul>
+        <li>Güven sorunu (tanınmayan marka)</li>
+        <li>Amazon API değişiklikleri</li>
+        <li>Google Ads maliyeti artışı</li>
+        <li>AI tabanlı rakipler (Browse AI)</li>
+        <li>Negatif Reddit yorumu riski</li>
+        <li>GDPR uyum riski (Avrupa)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num" style="display: none;">04 / 10</div>
+</div>
+
+<!-- SLIDE 5: FUNNEL -->
+<div class="slide">
+  <div class="badge">Pazarlama Hunisi</div>
+  <h2>Üyelik Satış Hunisi</h2>
+  <div style="width:100%;max-width:800px;margin-top:32px">
+    <div style="background:linear-gradient(135deg,rgba(99,102,241,0.2),rgba(139,92,246,0.1));border:1px solid rgba(99,102,241,0.4);border-radius:16px;padding:24px 32px;margin-bottom:12px;text-align:center">
+      <div style="font-size:13px;color:#6366f1;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">TOFU — Farkındalık</div>
+      <div style="color:#e2e8f0;font-size:16px">YouTube Pre-roll · TikTok Videoları · Reddit Organik · Google Display</div>
+      <div style="color:#475569;font-size:13px;margin-top:6px">Hedef: Aylık 50.000+ kullanıcıya ulaş</div>
+    </div>
+    <div style="text-align:center;color:#334155;font-size:24px;margin:4px 0">↓</div>
+    <div style="background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(99,102,241,0.1));border:1px solid rgba(139,92,246,0.4);border-radius:16px;padding:24px 32px;margin-bottom:12px;text-align:center">
+      <div style="font-size:13px;color:#8b5cf6;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">MOFU — Değerlendirme</div>
+      <div style="color:#e2e8f0;font-size:16px">Google Search Ads (rakip keyword) · Meta Retargeting · Influencer Demo</div>
+      <div style="color:#475569;font-size:13px;margin-top:6px">Hedef: Aylık 500+ ücretsiz kayıt</div>
+    </div>
+    <div style="text-align:center;color:#334155;font-size:24px;margin:4px 0">↓</div>
+    <div style="background:linear-gradient(135deg,rgba(52,211,153,0.15),rgba(16,185,129,0.05));border:1px solid rgba(52,211,153,0.4);border-radius:16px;padding:24px 32px;text-align:center">
+      <div style="font-size:13px;color:#34d399;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">BOFU — Dönüşüm</div>
+      <div style="color:#e2e8f0;font-size:16px">Branded Search · Email Nurture · Fiyat Sayfası Retargeting</div>
+      <div style="color:#475569;font-size:13px;margin-top:6px">Hedef: %8–12 freemium→paid dönüşüm</div>
+    </div>
+  </div>
+  <div class="slide-num" style="display: none;">05 / 10</div>
+</div>
+
+<!-- SLIDE 6: PLAN -->
+<div class="slide" id="plan">
+  <div class="badge">Uygulama Planı</div>
+  <h2>3 Aylık Yol Haritası</h2>
+  <div style="width:100%;max-width:860px;margin-top:32px">
+    <div class="phase">
+      <div class="phase-num">1</div>
+      <div class="phase-content">
+        <h4>Ay 1 — Temel Altyapı (Reklamdan Önce Zorunlu)</h4>
+        <p>Google Analytics 4 + Meta Pixel kurulumu · Trustpilot/G2 profili + ilk 25 review · Karşılaştırma landing page'leri (vs Helium 10, vs Jungle Scout) · Teknik SEO düzeltmeleri · Demo video çekimi · Email nurture dizisi (7 email)</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">2</div>
+      <div class="phase-content">
+        <h4>Ay 2 — Test &amp; Öğren</h4>
+        <p>Google Ads ilk kampanyalar (rakip keyword'ler) · Meta soğuk kitle testi (5–10 reklam varyasyonu) · Reddit organik topluluk paylaşımları · İlk 10–20 influencer outreach · YouTube pre-roll kampanyası · A/B testi: pricing page CTA</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">3</div>
+      <div class="phase-content">
+        <h4>Ay 3 — Ölçeklendir &amp; Büyüt</h4>
+        <p>Kazanan kanalları 2x bütçe ile ölçeklendir · Almanya için Almanca reklam versiyonları · LinkedIn kurumsal kampanyası · Affiliate program aktif · Blog içerikleri (haftada 2) · Aylık optimizasyon raporu</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num" style="display: none;">06 / 10</div>
+</div>
+
+<!-- SLIDE 7: BÜTÇE -->
+<div class="slide" id="budget">
+  <div class="badge">Bütçe &amp; Hedefler</div>
+  <h2>Bütçe Planı &amp; Beklenen Sonuçlar</h2>
+  <div style="width:100%;max-width:800px;margin-top:32px">
+    <div class="budget-row">
+      <span style="color:#94a3b8">Google Ads (Search + Display)</span>
+      <span style="font-weight:700">$2,300/ay</span>
+    </div>
+    <div class="budget-row">
+      <span style="color:#94a3b8">Meta Ads (Facebook + Instagram)</span>
+      <span style="font-weight:700">$1,200/ay</span>
+    </div>
+    <div class="budget-row">
+      <span style="color:#94a3b8">YouTube Ads</span>
+      <span style="font-weight:700">$700/ay</span>
+    </div>
+    <div class="budget-row">
+      <span style="color:#94a3b8">Reddit + LinkedIn</span>
+      <span style="font-weight:700">$1,100/ay</span>
+    </div>
+    <div class="budget-row">
+      <span style="color:#94a3b8">Influencer + Affiliate</span>
+      <span style="font-weight:700">$800/ay</span>
+    </div>
+    <div class="budget-row">
+      <span style="font-size:18px;font-weight:800;color:#a78bfa">Toplam Reklam Bütçesi</span>
+      <span style="font-size:24px;font-weight:900;color:#a78bfa">$6,100/ay</span>
+    </div>
+  </div>
+  <div class="grid3" style="margin-top:32px">
+    <div class="card" style="text-align:center">
+      <div class="num">500+</div>
+      <div class="num-label">Aylık ücretsiz kayıt hedefi</div>
+    </div>
+    <div class="card" style="text-align:center">
+      <div class="num">40–60</div>
+      <div class="num-label">Aylık yeni ödeyici kullanıcı</div>
+    </div>
+    <div class="card" style="text-align:center">
+      <div class="num">&lt;$80</div>
+      <div class="num-label">Hedef müşteri edinme maliyeti</div>
+    </div>
+  </div>
+  <div class="slide-num" style="display: none;">07 / 10</div>
+</div>
+
+
+<!-- SLIDE 8: INFLUENCER -->
+<div class="slide">
+  <div class="badge">Influencer Stratejisi</div>
+  <h2>Influencer &amp; Affiliate Yatırımı</h2>
+  <table class="vs-table" style="margin-top:32px">
+    <tbody><tr><th>Influencer Tipi</th><th>Abone</th><th>Video Başına</th><th>Öneri</th></tr>
+    <tr><td>Nano YouTube</td><td>1K–10K</td><td style="color:#34d399;font-weight:700">$200–$1,000</td><td><span style="color:#34d399">✓ İlk aşama</span></td></tr>
+    <tr><td>Micro YouTube</td><td>10K–50K</td><td style="color:#34d399;font-weight:700">$1,000–$3,000</td><td><span style="color:#34d399">✓ En iyi ROI</span></td></tr>
+    <tr><td>Mid-Tier YouTube</td><td>50K–500K</td><td style="color:#fbbf24;font-weight:700">$3,000–$10,000</td><td><span style="color:#fbbf24">⚠ Test sonrası</span></td></tr>
+    <tr><td>Macro YouTube</td><td>500K–1M</td><td style="color:#f87171;font-weight:700">$10,000–$25,000</td><td><span style="color:#f87171">✗ Erken</span></td></tr>
+  </tbody></table>
+  <div class="grid3" style="margin-top:32px">
+    <div class="card" style="text-align:center">
+      <div style="font-size:28px;margin-bottom:6px">🎯</div>
+      <h3>Tutumlu</h3>
+      <div class="num" style="font-size:32px">$1,500<span style="font-size:14px;-webkit-text-fill-color:#64748b">/ay</span></div>
+      <p style="margin-top:8px">2 Nano YouTube + 3 TikTok/IG</p>
+    </div>
+    <div class="card" style="text-align:center;border-color:rgba(52,211,153,0.5)">
+      <div style="font-size:28px;margin-bottom:6px">⭐</div>
+      <h3 style="color:#34d399">Dengeli (Önerilen)</h3>
+      <div class="num" style="font-size:32px">$3,000<span style="font-size:14px;-webkit-text-fill-color:#64748b">/ay</span></div>
+      <p style="margin-top:8px">1 Micro + 2 Nano YouTube + 3 TikTok</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:28px;margin-bottom:6px">🚀</div>
+      <h3>Agresif</h3>
+      <div class="num" style="font-size:32px">$5,000<span style="font-size:14px;-webkit-text-fill-color:#64748b">/ay</span></div>
+      <p style="margin-top:8px">1 Mid-tier + 2 Micro + 3 TikTok</p>
+    </div>
+  </div>
+  <div class="slide-num" style="display: none;">08 / 10</div>
+</div>
+
+<!-- SLIDE 9: HİZMET PAKETLERİ -->
+<div class="slide" style="background:radial-gradient(ellipse at 50% 50%,rgba(99,102,241,0.08) 0%,transparent 70%);padding-top:64px;padding-bottom:80px">
+  <div class="badge">Yatırım &amp; Getiri</div>
+  <h2 style="margin-bottom:8px">Hizmet Paketleri</h2>
+  <div class="grid3" style="margin-top:16px">
+    <div class="card" style="text-align:center;padding:24px 20px">
+      <div style="font-size:12px;color:#64748b;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Başlangıç</div>
+      <div class="num" style="font-size:34px">$3,500<span style="font-size:13px;-webkit-text-fill-color:#64748b">/ay</span></div>
+      <div style="font-size:11px;color:#475569;margin:4px 0 12px">Ajans Yönetim Ücreti</div>
+      <div style="text-align:left;font-size:12px;color:#94a3b8;line-height:1.8">
+        ✅ Google Ads (2 kampanya)<br>
+        ✅ Meta Ads (2 kampanya)<br>
+        ✅ Reklam copy yazımı<br>
+        ✅ Temel SEO<br>
+        ✅ Email otomasyon<br>
+        ✅ Aylık rapor<br>
+        <span style="color:#475569">✗ YouTube / LinkedIn / Reddit</span><br>
+        <span style="color:#475569">✗ Blog içerik</span><br>
+        <span style="color:#475569">✗ Influencer yönetimi</span>
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid #1e1e3a">
+        <div style="font-size:11px;color:#64748b">+ Reklam: $3,000/ay</div>
+        <div style="font-size:15px;font-weight:800;color:#e2e8f0;margin-top:6px">Toplam: $6,500/ay</div>
+      </div>
+    </div>
+    <div class="card" style="text-align:center;padding:24px 20px;border-color:rgba(52,211,153,0.5);position:relative;overflow:hidden">
+      <div style="position:absolute;top:14px;right:-30px;background:#34d399;color:#0a0a0f;font-size:10px;font-weight:800;padding:3px 36px;transform:rotate(45deg);letter-spacing:1px">ÖNERİLEN</div>
+      <div style="font-size:12px;color:#34d399;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Büyüme</div>
+      <div class="num" style="font-size:34px">$5,500<span style="font-size:13px;-webkit-text-fill-color:#64748b">/ay</span></div>
+      <div style="font-size:11px;color:#475569;margin:4px 0 12px">Ajans Yönetim Ücreti</div>
+      <div style="text-align:left;font-size:12px;color:#94a3b8;line-height:1.8">
+        ✅ Tüm reklam kanalları<br>
+        ✅ Blog (haftada 2 makale)<br>
+        ✅ Influencer yönetimi<br>
+        ✅ Affiliate program<br>
+        ✅ Sosyal medya<br>
+        ✅ Landing page opt.<br>
+        ✅ Review kampanyası<br>
+        ✅ Email marketing<br>
+        ✅ Haftalık rapor
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid #1e1e3a">
+        <div style="font-size:11px;color:#64748b">+ Reklam: $6,100 + Influencer: $2,000</div>
+        <div style="font-size:15px;font-weight:800;color:#34d399;margin-top:6px">Toplam: $13,600/ay</div>
+      </div>
+    </div>
+    <div class="card" style="text-align:center;padding:24px 20px">
+      <div style="font-size:12px;color:#a78bfa;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Kurumsal</div>
+      <div class="num" style="font-size:34px">$8,000<span style="font-size:13px;-webkit-text-fill-color:#64748b">/ay</span></div>
+      <div style="font-size:11px;color:#475569;margin:4px 0 12px">Ajans Yönetim Ücreti</div>
+      <div style="text-align:left;font-size:12px;color:#94a3b8;line-height:1.8">
+        ✅ Büyüme paketinin tümü<br>
+        ✅ Video prodüksiyon (4/ay)<br>
+        ✅ Çok dilli reklam (EN+DE+FR)<br>
+        ✅ Discord topluluk yönetimi<br>
+        ✅ Product Hunt lansmanı<br>
+        ✅ Haftalık strateji toplantısı<br>
+        ✅ 10-20 influencer/ay<br>
+        ✅ A/B test süreçleri<br>
+        ✅ Detaylı ROI raporu
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid #1e1e3a">
+        <div style="font-size:11px;color:#64748b">+ Reklam: $6,100 + Influencer: $4,000</div>
+        <div style="font-size:15px;font-weight:800;color:#a78bfa;margin-top:6px">Toplam: $18,400/ay</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:16px;text-align:center">
+    <div style="display:inline-block;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);border-radius:10px;padding:12px 28px">
+      <span style="color:#34d399;font-weight:700;font-size:14px">ROI Projeksiyonu:</span>
+      <span style="color:#e2e8f0;font-size:14px"> Ay 6'da tahmini MRR $6,000–$10,000 → Yıllık $72,000–$120,000+</span>
+    </div>
+  </div>
+  <div class="slide-num" style="display: none;">09 / 10</div>
+</div>
+
+<!-- SLIDE 10: CTA -->
+<div class="slide footer-slide" style="background:radial-gradient(ellipse at 50% 100%,rgba(99,102,241,0.2) 0%,transparent 70%)">
+  <div class="badge">Sonraki Adım</div>
+  <h1>Büyümeye<br>Hazır mısınız?</h1>
+  <p class="lead">Bu strateji, ApexScouty ve ApexCrawl'ı Amerika ve Avrupa pazarında tanınan, güvenilen ve tercih edilen SaaS araçları haline getirmek için tasarlanmıştır.</p>
+  <div class="grid3" style="margin-top:40px;margin-bottom:40px">
+    <div class="card" style="text-align:center">
+      <div style="font-size:32px;margin-bottom:8px">🔧</div>
+      <h3>Altyapı Kurulumu</h3>
+      <p>Pixel, analytics, landing page'ler</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:32px;margin-bottom:8px">⭐</div>
+      <h3>Review Kampanyası</h3>
+      <p>Trustpilot &amp; G2'de 25+ review</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:32px;margin-bottom:8px">🚀</div>
+      <h3>Reklam Lansmanı</h3>
+      <p>Google Ads + Meta + YouTube</p>
+    </div>
+  </div>
+  <div class="slide-num" style="display: none;">10 / 10</div>
+</div>
+
+
+<div class="slide-nav">
+  <button id="prevBtn" onclick="changeSlide(-1)">←</button>
+  <div class="dots" id="dots"><div class="dot"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+  <button id="nextBtn" onclick="changeSlide(1)">→</button>
+</div>
+<div class="slide-counter" id="slideCounter">02 / 10</div>
+<div class="key-hint" id="keyHint" style="opacity: 0;">← → ok tuslari ile gecis yapin</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+const dotsEl = document.getElementById('dots');
+const counterEl = document.getElementById('slideCounter');
+const hintEl = document.getElementById('keyHint');
+
+// Create dots
+for(let i = 0; i < total; i++){
+  const d = document.createElement('div');
+  d.className = 'dot';
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function goTo(n){
+  if(n < 0 || n >= total) return;
+  slides.forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+  current = n;
+  slides[current].classList.add('active');
+  document.querySelectorAll('.dot')[current].classList.add('active');
+  counterEl.textContent = String(current+1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+  if(hintEl.style.opacity !== '0') setTimeout(()=>{ hintEl.style.opacity='0'; },1500);
+}
+
+function changeSlide(dir){
+  goTo(current + dir);
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+  if(e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); changeSlide(-1); }
+  if(e.key === 'Home') { e.preventDefault(); goTo(0); }
+  if(e.key === 'End') { e.preventDefault(); goTo(total-1); }
+});
+
+// Remove old slide-num elements
+document.querySelectorAll('.slide-num').forEach(el => el.style.display = 'none');
+
+// Init
+goTo(0);
+</script>
+
+<div id="preact-border-shadow-host" popover="manual" style="border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; inset: 0px; position: fixed; width: 100vw; height: 100vh; background: transparent; pointer-events: none;"></div></body></html>
